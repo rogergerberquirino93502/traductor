@@ -32,21 +32,7 @@
 						<label>Ingresar Palabra</label>
 						<input type="text" class="form-control" id="q" placeholder="Ingresar Palabra" onkeyup='load(1);'>
 					</div>
-					<div class='col-md-4'>
-						<label>Filtrar por idioma</label>
-						<select class='form-control' name='id_idiomaa' id='id_idiomaa' onchange="load(1);">
-							<option value="">Selecciona un idioma</option>
-							<?php 
-							$query_idioma=mysqli_query($con,"select * from idiomas order by nombre_idioma");
-							while($rw=mysqli_fetch_array($query_idioma))	{
-								?>
-							<option value="<?php echo $rw['id_idioma'];?>"><?php echo $rw['nombre_idioma'];?></option>			
-								<?php
-							}
-							?>
-						</select>
-					</div>
-					<div class='col-md-12 text-center'>
+								<div class='col-md-12 text-center'>
 						<span id="loader"></span>
 					</div>
 				</div>

@@ -32,8 +32,7 @@
 	if($action == 'ajax'){
 		// escaping, additionally removing everything that could be (html/javascript-) code
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
-		 $id_idioma =intval($_REQUEST['id_idioma']);
-		 $aColumns = array('palabra_nueva', 'palabra_nueva');//Columnas de busqueda
+		 $aColumns = array('nombre_palabra');//Columnas de busqueda
 		 $sTable = "traductor";
 		 $aTable = "idiomas";
 		 $bTable = "palabras";
@@ -46,11 +45,6 @@
 			}
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';
-		
-		if ($id_idioma>0){
-			$sWhere .=" and id_idioma='$id_idioma'";
-		}
-		$sWhere.=" order by id_traductor desc";
 		include 'pagination.php'; //include pagination file
 		//pagination variables
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
@@ -58,7 +52,7 @@
 		$adjacents  = 4; //gap between pages after number of adjacents
 		$offset = ($page - 1) * $per_page;
 		//Count the total number of row in your table*/
-		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
+		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $bTable  $sWhere");
 		$row= mysqli_fetch_array($count_query);
 		$numrows = $row['numrows'];
 		$total_pages = ceil($numrows/$per_page);

@@ -4,8 +4,7 @@
 		});
 		function load(page){
 			var q= $("#q").val();
-			var id_idioma= $("#id_idioma").val();
-			var parametros = {"action":"ajax","page":page,'id_idioma':id_idioma,'q':q};
+			var parametros = {"action":"ajax","page":page,'q':q};
 			$("#loader").fadeIn('slow');
 			$.ajax({
 				data: parametros,
