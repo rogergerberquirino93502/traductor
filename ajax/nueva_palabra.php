@@ -8,10 +8,10 @@
 		require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
 		// escaping, additionally removing everything that could be (html/javascript-) code
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["nombre"],ENT_QUOTES)));
-		$sql="INSERT INTO idiomas (nombre_idioma) VALUES ('$nombre')";
+		$sql="INSERT INTO palabras (nombre_palabra) VALUES ('$nombre')";
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
-				$messages[] = "Idioma ha sido ingresada satisfactoriamente.";
+				$messages[] = "Palabra ha sido ingresada satisfactoriamente.";
 			} else{
 				$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
 			}

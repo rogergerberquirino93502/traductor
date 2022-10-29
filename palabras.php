@@ -2,8 +2,8 @@
 	require_once ("config/db.php");
 	require_once ("config/conexion.php");
 	
-	$active_idiomas="active";
-	$title="Idiomas ";
+	$active_palabras="active";
+	$title="Palabras ";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,7 @@
 	<div class="panel panel-success">
 		<div class="panel-heading">
 		    <div class="btn-group pull-right">
-				<button type='button' class="btn btn-success" data-toggle="modal" data-target="#nuevoIdioma"><span class="glyphicon glyphicon-plus" ></span> Nuevo Idioma</button>
+				<button type='button' class="btn btn-success" data-toggle="modal" data-target="#nuevaPalabra"><span class="glyphicon glyphicon-plus" ></span> Nuevo Idioma</button>
 			</div>
 			<h4><i class='glyphicon glyphicon-briefcase'></i> Listado de Idioma</h4>
 		</div>
@@ -28,7 +28,7 @@
 			
 			
 			<?php
-				include("modal/registro_idioma.php");
+				include("modal/registro_palabra.php");
 			?>
 			<form class="form-horizontal" role="form">
 				
@@ -44,18 +44,9 @@
 							</div>
 							
 						</div>
-				
-				
-				
 			</form>
 				<div id="resultados"></div><!-- Carga los datos ajax -->
 				<div class='outer_div'></div><!-- Carga los datos ajax -->
-			
-		
-	
-			
-			
-			
   </div>
 </div>
 		 
@@ -64,6 +55,6 @@
 	<?php
 	include("footer.php");
 	?>
-	<script type="text/javascript" src="js/idiomas.js"></script>
+	<script type="text/javascript" src="js/palabras.js"></script>
   </body>
 </html>

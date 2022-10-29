@@ -1,3 +1,3 @@
 <?php
-header("Location: principal.php");
+header("Location: traductor.php");
 ?>

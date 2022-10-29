@@ -1,22 +1,14 @@
-<?php
-include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
-		
+<?php		
 	/*Inicia validacion del lado del servidor*/
-	if (isset($_FILES['fotoi']['name'])) {
-		$tamano_archivo = $_FILES['fotoi']['size'];
-		$imagenSubida = fopen($_FILES['fotoi']['tmp_name'], 'r');
-		$binariosImagen = fread($imagenSubida, $tamano_archivo);
-	
-	if (empty($_POST['palabrae'])) {
+	if (empty($_POST['palabra'])) {
            $errors[] = "Palabra vacío";
-        } else if (empty($_POST['palabran'])){
-			$errors[] = "Palabra nueva vacío";
+        } else if (empty($_POST['palabra_nueva'])){
+			$errors[] = "Palabra Vacío";
 		} else if ($_POST['idioma']==""){
-			$errors[] = "Idioma vacío";
+			$errors[] = "Idioma Vacío";
 		}  else if (
-			!empty($_POST['palabrae']) &&
-			!empty($_POST['palabran']) &&
-			$_POST['idioma']!="" &&
+			!empty($_POST['palabra']) &&
+			!empty($_POST['palabra_nueva']) &&
 			!empty($_POST['idioma'])
 		){
 		/* Connect To Database*/
@@ -24,22 +16,19 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 		require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
 		include("../funciones.php");
 		// escaping, additionally removing everything that could be (html/javascript-) code
-		$palabrae=mysqli_real_escape_string($con,(strip_tags($_POST["palabrae"],ENT_QUOTES)));
-		$palabran=mysqli_real_escape_string($con,(strip_tags($_POST["palabran"],ENT_QUOTES)));
-		$id_idioma=intval($_POST['idioma']);
-		$date_added=date("Y-m-d H:i:s");
-		$binariosImagen = mysqli_real_escape_string($con,$binariosImagen);
 
+		$palabra_nueva=mysqli_real_escape_string($con,(strip_tags($_POST["palabra_nueva"],ENT_QUOTES)));
+		$id_palabra=intval($_POST['palabra']);
+		$id_idioma=intval($_POST['idioma']);
 		
-		$sql="INSERT INTO traductor (palabra_espaniol, palabra_nueva, date_added, id_idioma, imagen) VALUES ('$palabrae','$palabran','$date_added', '$id_idioma', '$binariosImagen')";
+		$sql="INSERT INTO traductor (id_palabra, palabra_nueva, id_idioma) VALUES ('$id_palabra','$palabra_nueva','$id_idioma')";
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
 				$messages[] = "Traduccion ha sido ingresado satisfactoriamente.";
-								
 			} else{
 				$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
 			}
-		} }else {
+		} else {
 			$errors []= "Error desconocido.";
 		}
 		

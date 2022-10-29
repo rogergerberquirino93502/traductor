@@ -34,7 +34,7 @@
 					</div>
 					<div class='col-md-4'>
 						<label>Filtrar por idioma</label>
-						<select class='form-control' name='id_idioma' id='id_idioma' onchange="load(1);">
+						<select class='form-control' name='id_idiomaa' id='id_idiomaa' onchange="load(1);">
 							<option value="">Selecciona un idioma</option>
 							<?php 
 							$query_idioma=mysqli_query($con,"select * from idiomas order by nombre_idioma");

@@ -11,14 +11,23 @@
 		  </div>
 		  <div class="modal-body">
 		  <div class="form-group" align="center">	
-			<img src="img/default_large.png" class="card-img-top" width="300" height="300"  alt="..." id="mostrarimagen">
 			  </div>
-			<form class="form-horizontal" method="post" id="guardar_traductor" name="guardar_traductor" enctype="multipart/form-data">
+			<form class="form-horizontal" method="post" id="guardar_traductor" name="guardar_traductor">
 			<div id="resultados_ajax_traductores"></div>
-			  <div class="form-group">
-				<label for="palabra_espaniol" class="col-sm-3 control-label">Palabra Español</label>
+			<div class="form-group">
+				<label for="palabra" class="col-sm-3 control-label">Palabras</label>
 				<div class="col-sm-8">
-				  <input type="text" class="form-control" id="palabra_espaniol" name="palabra_espaniol" placeholder="Palabra Español" required>
+					<select class='form-control' name='palabra' id='palabra' required>
+						<option value="">Seleccionar Palabra</option>
+							<?php 
+							$query_palabra=mysqli_query($con,"select * from palabras order by nombre_palabra");
+							while($rw=mysqli_fetch_array($query_palabra))	{
+								?>
+							<option value="<?php echo $rw['id_palabra'];?>"><?php echo $rw['nombre_palabra'];?></option>			
+								<?php
+							}
+							?>
+					</select>			  
 				</div>
 			  </div>
 			  
@@ -45,13 +54,7 @@
 					</select>			  
 				</div>
 			  </div>
-			
-			  <div class="form-group">
-				<label for="imagen" class="col-sm-3 control-label">Imagen</label>
-				<div class="col-sm-6">
-				  <input type="file" class="form-control" id="imagen" name="imagen" accept="image/png,image/jpg">
-				</div>
-			  </div>				 
+		 
 			
 		  </div>
 		  <div class="modal-footer">

@@ -5,10 +5,10 @@
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if (isset($_GET['id'])){
 		$id_categoria=intval($_GET['id']);
-		$query=mysqli_query($con, "select * from traductor where id_idioma='".$id_idioma."'");
+		$query=mysqli_query($con, "select * from traductor where id_palabra='".$id_palabra."'");
 		$count=mysqli_num_rows($query);
 		if ($count==0){
-			if ($delete1=mysqli_query($con,"DELETE FROM idiomas WHERE id_idioma='".$id_idioma."'")){
+			if ($delete1=mysqli_query($con,"DELETE FROM palabras WHERE id_palabra='".$id_idioma."'")){
 			?>
 			<div class="alert alert-success alert-dismissible" role="alert">
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -40,8 +40,8 @@
 	if($action == 'ajax'){
 		// escaping, additionally removing everything that could be (html/javascript-) code
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
-		 $aColumns = array('nombre_idioma');//Columnas de busqueda
-		 $sTable = "idiomas";
+		 $aColumns = array('nombre_palabra');//Columnas de busqueda
+		 $sTable = "palabras";
 		 $sWhere = "";
 		if ( $_GET['q'] != "" )
 		{
@@ -53,7 +53,7 @@
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';
 		}
-		$sWhere.=" order by nombre_idioma";
+		$sWhere.=" order by nombre_palabra";
 		include 'pagination.php'; //include pagination file
 		//pagination variables
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
@@ -82,16 +82,16 @@
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
-						$id_idioma=$row['id_idioma'];
-						$nombre_idioma=$row['nombre_idioma'];						
+						$id_palabra=$row['id_palabra'];
+						$nombre_palabra=$row['nombre_palabra'];
+						
 					?>
 					<tr>
 						
-						<td><?php echo $nombre_idioma; ?></td>
-			
+						<td><?php echo $nombre_palabra; ?></td>
 						
 					<td class='text-right'>
-						<a href="#" class='btn btn-default' title='Editar Idioma' data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i>Editar</a> 
+						<a href="#" class='btn btn-default' title='Editar palabra'  data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i>Editar</a> 
 					</td>
 						
 					</tr>

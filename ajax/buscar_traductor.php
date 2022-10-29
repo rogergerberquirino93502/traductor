@@ -33,9 +33,10 @@
 		// escaping, additionally removing everything that could be (html/javascript-) code
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
 		 $id_idioma =intval($_REQUEST['id_idioma']);
-		 $aColumns = array('palabra_espaniol', 'palabra_nueva');//Columnas de busqueda
+		 $aColumns = array('palabra_nueva', 'palabra_nueva');//Columnas de busqueda
 		 $sTable = "traductor";
 		 $aTable = "idiomas";
+		 $bTable = "palabras";
 		 $sWhere = "";
 		
 			$sWhere = "WHERE (";
@@ -63,10 +64,9 @@
 		$total_pages = ceil($numrows/$per_page);
 		$reload = './traductor.php';
 		//main query to fetch the data
-		$sql="SELECT $sTable.id_traductor, $sTable.palabra_espaniol, $sTable.palabra_nueva, 
-		 $sTable.imagen, $sTable.date_added, $aTable.nombre_idioma FROM  $sTable INNER JOIN $aTable ON  $sTable.id_idioma = $aTable.id_idioma 
-		$sWhere LIMIT $offset,$per_page";
-		//$sql="SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
+		$sql="SELECT $sTable.id_traductor ,$bTable.nombre_palabra, $sTable.palabra_nueva,
+		$aTable.nombre_idioma FROM  $sTable INNER JOIN $aTable ON  $sTable.id_idioma = $aTable.id_idioma 
+		INNER JOIN $bTable ON  $sTable.id_palabra= $bTable.id_palabra $sWhere LIMIT $offset,$per_page"; 
 		$query = mysqli_query($con, $sql);
 		//loop through fetched data
 		if ($numrows>0){
@@ -75,31 +75,24 @@
 			  <div class="table-responsive">
 			  <table class="table">
 				<tr  class="info">
-					<th>En Español</th>
-					<th>Traducido</th>
+					<th>Palabra</th>
+					<th>Traduccion</th>
 					<th>Idioma</th>
-					<th>Imagen</th>
-					<th>Fecha</th>
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
 						$id_traductor=$row['id_traductor'];
-						$palabra_espaniol=$row['palabra_espaniol'];
+						$nombre_palabra=$row['nombre_palabra'];
 						$palabra_nueva=$row['palabra_nueva'];
 						$nombre_idioma=$row['nombre_idioma'];
-						$imagen=$row['imagen'];
-						$fecha=date("d/m/Y", strtotime($row['date_added']));
-						
+		
 					?>
 					<tr>
-						<td><?php echo $palabra_espaniol; ?></td>
+						<td><?php echo $nombre_palabra; ?></td>
 						<td><?php echo $palabra_nueva; ?></td>
 						<td><?php echo $nombre_idioma; ?></td>
-						<td id="example1"><?php echo '<img class="zoom" src="data:image/jpeg;base64,'.base64_encode($imagen).'" class="card-img-top" width="300" height="300"/>';?></td>
-						<td><?php echo $fecha; ?></td>
-						<td class="text-right">
-                            <a href="editar_evidencia.php?id_evidencia=<?php echo $id_evidencia;?>" class='btn btn-default' title='Editar Evidencia' data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a href="#" class='btn btn-default' title='Descargar Evidencia' onclick="imprimir_factura('<?php echo $id_evidencia;?>');"><i class="glyphicon glyphicon-download"></i></a>
+             
+                        <td class="text-right">
                         </td>
 
                     </tr>

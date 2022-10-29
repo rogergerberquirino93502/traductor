@@ -16,8 +16,9 @@
       <ul class="nav navbar-nav">
       <li class="<?php if (isset($active_traductor)){echo $active_traductor;}?>"><a href="traductor.php"><i class='glyphicon glyphicon-search'></i> Traductor</a></li>
     <li class="<?php if (isset($active_principal)){echo $active_principal;}?>"><a href="principal.php"><i class='glyphicon glyphicon-folder-open'></i> Diccionario</a></li>
-		<li class="<?php if (isset($active_idiomas)){echo $active_idiomas;}?>"><a href="idiomas.php"><i class='glyphicon glyphicon-tags'></i> Idiomas</a></li>
-       </ul>
+		<li class="<?php if (isset($active_palabras)){echo $active_palabras;}?>"><a href="palabras.php"><i class='glyphicon glyphicon-tags'></i> Nativo</a></li>
+    <li class="<?php if (isset($active_idiomas)){echo $active_idiomas;}?>"><a href="idiomas.php"><i class='glyphicon glyphicon-tags'></i> Idiomas</a></li>
+  </ul>
        <ul>
        <a class="navbar-brand" href="traductor.php">
           <li>
